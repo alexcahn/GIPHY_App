@@ -36,9 +36,9 @@ $(document).ready(function () {
 })
 
 // display gifs
-function displayGifs(url) {
+function displayGifs(queryURL) {
 
-    $.get(url)
+    $.get(queryURL)
         .then(function (response) {
             console.log(response)
 
@@ -47,6 +47,11 @@ function displayGifs(url) {
                 gif.attr("data-still", response.data[i].images.fixed_height_small_still.url);
                 gif.attr("data-animate", response.data[i].images.fixed_height_small.url);
                 gif.attr("src", response.data[i].images.fixed_height_small_still.url);
+
+                // display ratings
+                var rating = response.data[i].rating
+                var p = $("<p>").text("Rating: " + rating);
+                $("#gifDisplay").append(p);
                 
                 gif.addClass("image");
                 $("#gifDisplay").append(gif);
