@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     var topics = ["Hockey", "Football", "Basketball", "Baseball", "Soccer", "Golf", "Volleyball"]
     displayButtons(topics);
-    
+
 
     // create buttons for each array item - loop through variable and add buttons
     // click on button, 10 non-animated gifs appear
@@ -17,17 +17,15 @@ $(document).ready(function () {
         var topic = $(this).attr("data-name");
         var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=LnrgzY7g8GFkXcrn9YrMROQXNm8tOCxg&limit=10&q=" + topic
         displayGifs(queryURL);
+
     })
-    
+
     $(document).on("click", ".image", function () {
         var animateUrl = $(this).attr("data-animate");
-        console.log(animateUrl);
         var stillUrl = $(this).attr("data-still");
-        console.log(stillUrl);
         var currentSrc = $(this).attr("src");
-        console.log(currentSrc);
 
-        if(currentSrc === stillUrl){
+        if (currentSrc === stillUrl) {
             $(this).attr("src", animateUrl);
         } else {
             $(this).attr("src", stillUrl);
@@ -52,12 +50,13 @@ function displayGifs(queryURL) {
                 var rating = response.data[i].rating
                 var p = $("<p>").text("Rating: " + rating);
                 $("#gifDisplay").append(p);
-                
+
                 gif.addClass("image");
                 $("#gifDisplay").append(gif);
             }
         })
 }
+
 
 //   display buttons
 function displayButtons(topics) {
@@ -70,3 +69,4 @@ function displayButtons(topics) {
         $("#buttons").append(button);
     }
 }
+
