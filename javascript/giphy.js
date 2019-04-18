@@ -20,6 +20,14 @@ $(document).ready(function () {
 
     })
 
+    $(document).on("click", "#add-sport", function(event) {
+        event.preventDefault();
+        var newButton = $("#sports-input").val().trim();
+        topics.push(newButton);
+        displayButtons(topics);
+        $("#sports-input").empty();
+    })
+
     $(document).on("click", ".image", function () {
         var animateUrl = $(this).attr("data-animate");
         var stillUrl = $(this).attr("data-still");
@@ -39,7 +47,6 @@ function displayGifs(queryURL) {
     $.get(queryURL)
         .then(function (response) {
             console.log(response)
-
             for (var i = 0; i < response.data.length; i++) {
                 var gif = $("<img>");
                 gif.attr("data-still", response.data[i].images.fixed_height_small_still.url);
@@ -60,13 +67,12 @@ function displayGifs(queryURL) {
 
 //   display buttons
 function displayButtons(topics) {
+    $("#buttons").empty();
     for (var i = 0; i < topics.length; i++) {
-        console.log(topics[i])
         var button = $("<button>");
         button.text(topics[i]);
-        button.addClass("sport");
+        button.addClass("sport btn btn-primary");
         button.attr("data-name", topics[i]);
         $("#buttons").append(button);
     }
 }
-
